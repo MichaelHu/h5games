@@ -49,7 +49,8 @@ function init(){
 
     function createArrow(pX, pY){
 
-        var angle = Math.atan2(pY - 450, pX);
+        // var angle = Math.atan2(pY - 450, pX);
+        var angle = Math.atan2(pY - 440, pX - 30);
 
         var vertices = [];
         vertices.push(new b2Vec2(-1.4, 0));
@@ -59,7 +60,7 @@ function init(){
 
         var bodyDef = new b2BodyDef;
         bodyDef.type = b2Body.b2_dynamicBody;
-        bodyDef.position.Set( 40 / worldScale, 400 / worldScale);
+        bodyDef.position.Set( 30 / worldScale, 440 / worldScale);
         bodyDef.userData = 'Arrow';
 
         var polygonShape = new b2PolygonShape;
@@ -68,14 +69,14 @@ function init(){
         var fixtureDef = new b2FixtureDef;
         fixtureDef.density = 1.0;
         fixtureDef.friction = 0.5;
-        fixtureDef.restitution = 0.5;
+        fixtureDef.restitution = 0.2;
         fixtureDef.shape = polygonShape;
 
         var body = world.CreateBody(bodyDef);
         body.CreateFixture(fixtureDef);
 
         body.SetLinearVelocity(
-            new b2Vec2(20 * Math.cos(angle), 20 * Math.sin(angle))
+            new b2Vec2(50 * Math.cos(angle), 50 * Math.sin(angle))
         );
         body.SetAngle(angle);
         body.SetAngularDamping(dampingConstant);
@@ -93,7 +94,7 @@ function init(){
         var fixtureDef = new b2FixtureDef;
         fixtureDef.density = 1.0;
         fixtureDef.friction = 0.5;
-        fixtureDef.restitution = 0.5;
+        fixtureDef.restitution = 0;
         fixtureDef.shape = polygonShape;
 
         var body = world.CreateBody(bodyDef);
@@ -106,7 +107,7 @@ function init(){
         with(debugDraw){
             SetSprite(context);
             SetDrawScale(worldScale);
-            SetFillAlpha(0.5);
+            SetFillAlpha(0.6);
             SetLineThickness(1.0);
         }
 
